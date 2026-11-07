@@ -286,6 +286,8 @@ img {
 .site-logo {
   width: 2.25rem;
   height: 2.25rem;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
 }
 
 .site-nav {
