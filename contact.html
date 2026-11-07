@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact NIKIL RAJ K - Web Developer &amp; AI Engineering</title>
+  <meta name="description" content="Get in touch with NIKIL RAJ K for web development contracts, Python &amp; AI projects, or collaborations. Based in Kochi, Kerala. Phone: 8954322245.">
+  <meta name="theme-color" content="#0369a1">
+  <link rel="canonical" href="https://example.com/contact.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/contact.html">
+  <meta property="og:title" content="Contact NIKIL RAJ K - Web Developer">
+  <meta property="og:description" content="Get in touch with NIKIL RAJ K for web development contracts, Python &amp; AI projects, or collaborations. Based in Kochi, Kerala. Phone: 8954322245.">
+  <meta property="og:image" content="https://example.com/images/og-image.svg">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://example.com/contact.html">
+  <meta name="twitter:title" content="Contact NIKIL RAJ K - Web Developer">
+  <meta name="twitter:description" content="Get in touch with NIKIL RAJ K for web development contracts, Python &amp; AI projects, or collaborations. Based in Kochi, Kerala. Phone: 8954322245.">
+  <meta name="twitter:image" content="https://example.com/images/og-image.svg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Skip Link for Keyboard Accessibility (WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header Landmark -->
+  <header class="site-header" role="banner">
+    <div class="container header-container">
+      <a href="index.html" class="site-branding" aria-label="NIKIL RAJ K Portfolio Homepage">
+        <svg class="site-logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <rect width="100" height="100" rx="20" fill="#0f172a"/>
+          <path d="M30 70 L50 25 L70 70 M37 54 L63 54" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <span>NIKIL RAJ K</span>
+      </a>
+
+      <!-- Primary Navigation Landmark -->
+      <nav class="site-nav" aria-label="Primary navigation">
+        <button type="button" class="nav-toggle" id="nav-toggle-btn" aria-expanded="false" aria-controls="primary-nav-list" aria-label="Toggle navigation menu">
+          <span class="nav-toggle-icon" aria-hidden="true"></span>
+          <span>Menu</span>
+        </button>
+        <ul class="nav-list" id="primary-nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
+          <li><a href="contact.html" class="nav-link" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Landmark -->
+  <main id="main-content" tabindex="-1">
+    <div class="container">
+      <header class="section-header">
+        <h1>Contact &amp; Project Inquiries</h1>
+        <p class="lead-text">
+          Have a question, web project proposal, or collaboration idea? Send a message using the form below or reach out directly.
+        </p>
+      </header>
+
+      <div class="contact-layout">
+        <!-- Form Section -->
+        <section aria-labelledby="form-heading">
+          <h2 id="form-heading" class="sr-only">Send a Message</h2>
+
+          <!-- Error Summary (Receives programmatic focus when form has validation errors) -->
+          <div id="error-summary" class="error-summary" role="alert" tabindex="-1" aria-labelledby="error-summary-heading">
+            <h2 id="error-summary-heading">There is a problem with your submission</h2>
+            <p>Please correct the following errors before submitting:</p>
+            <ul id="error-summary-list"></ul>
+          </div>
+
+          <!-- Status region for successful submission announcements -->
+          <div id="form-status" class="form-status" aria-live="polite"></div>
+
+          <form id="contact-form" class="contact-form" method="post" action="#" novalidate>
+            <!-- Honeypot Field (Invisible to sighted & screen-reader users, catches bots) -->
+            <div class="form-hp" aria-hidden="true">
+              <label for="website_url">Leave this field blank if you are human</label>
+              <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
+            </div>
+
+            <fieldset class="form-fieldset">
+              <legend class="sr-only">Contact Details and Message</legend>
+
+              <!-- Name Field -->
+              <div class="form-group">
+                <label for="user-name" class="form-label">
+                  Full Name <span class="required-indicator" aria-hidden="true">*</span>
+                  <span class="sr-only">(required)</span>
+                </label>
+                <input
+                  type="text"
+                  id="user-name"
+                  name="name"
+                  class="form-control"
+                  autocomplete="name"
+                  required
+                  aria-required="true"
+                  aria-describedby="user-name-error"
+                >
+                <p id="user-name-error" class="field-error" aria-live="polite"></p>
+              </div>
+
+              <!-- Email Field -->
+              <div class="form-group">
+                <label for="user-email" class="form-label">
+                  Email Address <span class="required-indicator" aria-hidden="true">*</span>
+                  <span class="sr-only">(required)</span>
+                </label>
+                <input
+                  type="email"
+                  id="user-email"
+                  name="email"
+                  class="form-control"
+                  autocomplete="email"
+                  required
+                  aria-required="true"
+                  aria-describedby="user-email-hint user-email-error"
+                >
+                <p id="user-email-hint" class="form-hint">We will only use this address to reply to your inquiry.</p>
+                <p id="user-email-error" class="field-error" aria-live="polite"></p>
+              </div>
+
+              <!-- Subject Select Dropdown -->
+              <div class="form-group">
+                <label for="user-subject" class="form-label">
+                  Subject <span class="required-indicator" aria-hidden="true">*</span>
+                  <span class="sr-only">(required)</span>
+                </label>
+                <select
+                  id="user-subject"
+                  name="subject"
+                  class="form-control"
+                  required
+                  aria-required="true"
+                  aria-describedby="user-subject-error"
+                >
+                  <option value="">-- Please select an inquiry type --</option>
+                  <option value="project">Web Development / Freelance Project</option>
+                  <option value="ai-nlp">AI &amp; NLP / ResumeIQ Collaboration</option>
+                  <option value="internship">Internship / Job Opportunity</option>
+                  <option value="other">General Inquiry</option>
+                </select>
+                <p id="user-subject-error" class="field-error" aria-live="polite"></p>
+              </div>
+
+              <!-- Message Field -->
+              <div class="form-group">
+                <label for="user-message" class="form-label">
+                  Message <span class="required-indicator" aria-hidden="true">*</span>
+                  <span class="sr-only">(required)</span>
+                </label>
+                <p id="user-message-hint" class="form-hint">Minimum 10 characters.</p>
+                <textarea
+                  id="user-message"
+                  name="message"
+                  class="form-control"
+                  rows="6"
+                  required
+                  aria-required="true"
+                  aria-describedby="user-message-hint user-message-error"
+                ></textarea>
+                <p id="user-message-error" class="field-error" aria-live="polite"></p>
+              </div>
+
+              <!-- Consent Checkbox -->
+              <div class="checkbox-group">
+                <input
+                  type="checkbox"
+                  id="user-consent"
+                  name="consent"
+                  class="checkbox-control"
+                  required
+                  aria-required="true"
+                  aria-describedby="user-consent-error"
+                >
+                <label for="user-consent" class="checkbox-label">
+                  I agree that my submitted information may be processed to respond to this inquiry.
+                  <span class="required-indicator" aria-hidden="true">*</span>
+                  <span class="sr-only">(required)</span>
+                </label>
+              </div>
+              <p id="user-consent-error" class="field-error" aria-live="polite" style="margin-top: -1rem; margin-bottom: 1.5rem;"></p>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary" id="submit-btn">Send Message</button>
+            </fieldset>
+          </form>
+        </section>
+
+        <!-- Direct Contact Details Aside -->
+        <aside class="contact-aside" aria-labelledby="direct-contact-heading">
+          <div class="sidebar-card">
+            <h2 id="direct-contact-heading">Direct Details</h2>
+            <p>Feel free to reach out directly via call, email, or Instagram:</p>
+
+            <address class="footer-address" style="margin-top: 1rem; line-height: 2.2;">
+              <div>
+                <strong>Phone:</strong><br>
+                <a href="tel:8925170432">+91 8925170432</a>
+              </div>
+              <div style="margin-top: 0.5rem;">
+                <strong>Email:</strong><br>
+                <a href="mailto:nikilraj2688@gmail.com">nikilraj2688@gmail.com</a>
+              </div>
+              <div style="margin-top: 0.5rem;">
+                <strong>Instagram:</strong><br>
+                <a href="https://instagram.com/nikil_.raj" target="_blank" rel="noopener noreferrer">@nikil_.raj <span class="sr-only">(opens in new tab)</span></a>
+              </div>
+              <div style="margin-top: 0.5rem;">
+                <strong>Address:</strong><br>
+                Vadakkankulam, Tirunelveli, Tamil Nadu, India
+              </div>
+            </address>
+          </div>
+
+          <div class="sidebar-card">
+            <h2>Accessibility Guarantee</h2>
+            <p>
+              This website is audited to WCAG 2.2 AA standards. If you encounter any access barriers, please let me know and I will gladly provide an accommodation.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Landmark -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-content">
+      <div class="footer-info">
+        <p><strong>NIKIL RAJ K</strong> &mdash; Web Developer</p>
+        <address class="footer-address">
+          <span>Vadakkankulam, Tirunelveli, Tamil Nadu</span> &bull;
+          <a href="mailto:nikilraj2688@gmail.com">nikilraj2688@gmail.com</a> &bull;
+          <a href="tel:8925170432">+91 8925170432</a>
+        </address>
+      </div>
+
+      <nav aria-label="Social media links">
+        <ul class="footer-social-list">
+          <li>
+            <a href="https://instagram.com/nikil_.raj" class="social-link" target="_blank" rel="noopener noreferrer">
+              Instagram (@nikil_.raj) <span class="sr-only">(opens in new tab)</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/nikilraj2688-pixel" class="social-link" target="_blank" rel="noopener noreferrer">
+              GitHub <span class="sr-only">(opens in new tab)</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/nikil-raj-ab12b8347/" class="social-link" target="_blank" rel="noopener noreferrer">
+              LinkedIn <span class="sr-only">(opens in new tab)</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; <time datetime="2026">2026</time> NIKIL RAJ K. All rights reserved.</p>
+      <p>Built with semantic HTML5, CSS3, and vanilla JS. WCAG 2.2 AA compliant.</p>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>

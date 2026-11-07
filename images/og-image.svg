@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0f172a"/>
+  <circle cx="1050" cy="150" r="300" fill="#0369a1" opacity="0.3"/>
+  <circle cx="150" cy="500" r="250" fill="#0d9488" opacity="0.25"/>
+  <text x="100" y="240" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="800" fill="#ffffff">NIKIL RAJ K</text>
+  <text x="100" y="315" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="600" fill="#38bdf8">Web Developer &amp; AI / ML Engineer</text>
+  <text x="100" y="390" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#94a3b8">Python, Web Development, Vibe Coding, SQL, and NLP Systems.</text>
+  <rect x="100" y="440" width="220" height="4" rx="2" fill="#38bdf8"/>
+</svg>
