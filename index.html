@@ -1,250 +1,575 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NIKIL RAJ K - Professional Web Developer Portfolio</title>
-  <meta name="description" content="Explore the portfolio of NIKIL RAJ K, a Web Developer &amp; AI enthusiast specializing in Python, SQL, modern web applications, and WCAG standards.">
-  <meta name="theme-color" content="#0369a1">
-  <link rel="canonical" href="https://example.com/index.html">
+  <title>Nikil Raj K &mdash; Full Stack Developer &amp; AI/ML Engineer</title>
+  <meta name="description" content="Explore the live personal portfolio of Nikil Raj K, featuring AI systems, full-stack projects, core skills, interactive resume viewer, and contact details.">
+  <meta name="theme-color" content="#0f0f1a">
+  <link rel="canonical" href="https://example.com/">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://example.com/index.html">
-  <meta property="og:title" content="NIKIL RAJ K - Web Developer &amp; AI/ML Portfolio">
-  <meta property="og:description" content="Explore the portfolio of NIKIL RAJ K, a Web Developer &amp; AI enthusiast specializing in Python, SQL, modern web applications, and WCAG standards.">
-  <meta property="og:image" content="https://example.com/images/og-image.svg">
-
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://example.com/index.html">
-  <meta name="twitter:title" content="NIKIL RAJ K - Web Developer &amp; AI/ML Portfolio">
-  <meta name="twitter:description" content="Explore the portfolio of NIKIL RAJ K, a Web Developer &amp; AI enthusiast specializing in Python, SQL, modern web applications, and WCAG standards.">
-  <meta name="twitter:image" content="https://example.com/images/og-image.svg">
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:title" content="Nikil Raj K &mdash; Full Stack Developer &amp; AI Engineer">
+  <meta property="og:description" content="Explore the live personal portfolio of Nikil Raj K. Full Stack &amp; AI engineer crafting intelligent web solutions.">
+  <meta property="og:image" content="assets/profile.jpeg">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/jpeg" href="favicon.jpeg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+  <link rel="icon" type="image/jpeg" href="/assets/favicon.jpeg?v=2">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <link rel="apple-touch-icon" href="/assets/favicon.jpeg?v=2">
+
+  <!-- Fonts: Google Fonts (Poppins & Fira Code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/style.css">
 
-  <!-- Structured Data: JSON-LD Person & WebSite Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://example.com/#website",
-        "url": "https://example.com/",
-        "name": "NIKIL RAJ K - Portfolio",
-        "description": "Portfolio of NIKIL RAJ K, Web Developer and AI/ML Engineer",
-        "inLanguage": "en"
-      },
-      {
-        "@type": "Person",
-        "@id": "https://example.com/#person",
-        "name": "NIKIL RAJ K",
-        "jobTitle": "Web Developer",
-        "email": "mailto:nikilraj2688@gmail.com",
-        "telephone": "+918925170432",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Vadakkankulam",
-          "addressLocality": "Tirunelveli",
-          "addressRegion": "Tamil Nadu",
-          "addressCountry": "IN"
-        },
-        "description": "Web Developer and AI/ML student at Rajalakshmi Institute of Technology with skills in Python, Git, SQL, and Vibe Coding.",
-        "url": "https://example.com/",
-        "image": "https://example.com/images/profile.jpeg",
-        "sameAs": [
-          "https://instagram.com/nikil_.raj",
-          "https://github.com/",
-          "https://linkedin.com/"
-        ]
-      }
-    ]
-  }
+  <!-- Prevent FOUC Theme Flash -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('nikil_live_portfolio_theme');
+        if (saved) {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch(e) {}
+    })();
   </script>
 </head>
 <body>
-  <!-- Skip Link for Keyboard Accessibility (WCAG 2.4.1) -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <!-- Accessibility Skip Link -->
+  <a href="#home" class="sr-only">Skip to main content</a>
 
-  <!-- Header Landmark -->
-  <header class="site-header" role="banner">
-    <div class="container header-container">
-      <a href="index.html" class="site-branding" aria-label="NIKIL RAJ K Portfolio Homepage">
-        <img src="favicon.jpeg" alt="" class="site-logo" width="36" height="36" aria-hidden="true">
-        <span>NIKIL RAJ K</span>
+  <!-- Preloader Screen -->
+  <div id="preloader" aria-hidden="true">
+    <div class="spinner"></div>
+    <div class="preloader-text">&lt;NIKIL_RAJ /&gt;</div>
+  </div>
+
+  <!-- Animated Ambient Blobs & Cursor Reactive Spotlight -->
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="cursor-spotlight" id="cursor-spotlight"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- 1. Sticky Glass Navbar -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="container navbar-container">
+      <a href="#home" class="nav-brand" aria-label="Nikil Raj K - Home">
+        <img src="assets/favicon.jpeg" alt="" class="nav-logo-img" width="36" height="36" aria-hidden="true">
+        <span class="nav-brand-text">NIKIL RAJ K</span>
       </a>
 
-      <!-- Primary Navigation Landmark -->
-      <nav class="site-nav" aria-label="Primary navigation">
-        <button type="button" class="nav-toggle" id="nav-toggle-btn" aria-expanded="false" aria-controls="primary-nav-list" aria-label="Toggle navigation menu">
-          <span class="nav-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+      <div class="nav-actions">
+        <!-- Navigation Menu -->
+        <nav role="navigation" aria-label="Main navigation">
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Theme Toggle Button -->
+        <button type="button" class="theme-btn" id="theme-toggle-btn" aria-label="Toggle theme mode" aria-pressed="true">
+          <!-- Sun Icon -->
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" style="display: block;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+          </svg>
+          <!-- Moon Icon -->
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" style="display: none;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
         </button>
-        <ul class="nav-list" id="primary-nav-list">
-          <li><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
-          <li><a href="about.html" class="nav-link">About</a></li>
-          <li><a href="projects.html" class="nav-link">Projects</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button type="button" class="hamburger" id="hamburger-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Main Landmark -->
-  <main id="main-content" tabindex="-1">
-    <div class="container">
-      <!-- Hero Section -->
-      <section class="hero-section" aria-labelledby="hero-heading">
-        <div class="hero-text">
-          <h1 id="hero-heading">Hi, I'm NIKIL RAJ K &mdash; Web Developer &amp; AI / ML Enthusiast</h1>
+  <main id="main-content">
+    <!-- 2. Hero Section (Home) -->
+    <section class="section hero" id="home" aria-label="Hero Introduction">
+      <div class="container hero-grid">
+        <!-- Hero Content Column -->
+        <div class="hero-content reveal">
+          <span class="hero-greeting">👋 Hey, welcome to my universe</span>
+          <h1 class="hero-title">
+            I'm <span class="gradient-text">Nikil Raj K</span>
+          </h1>
+
+          <!-- Typing Rotating Roles -->
+          <div class="hero-roles" aria-live="polite">
+            <span class="hero-roles-prefix">I build as a </span>
+            <span>
+              <span id="typing-text" class="gradient-text"></span>
+              <span class="typing-cursor" aria-hidden="true"></span>
+            </span>
+          </div>
+
           <p class="hero-tagline">
-            B.E. in Computer Science &amp; Engineering (AI &amp; ML) at Rajalakshmi Institute of Technology. Building intelligent, accessible web solutions with Python, SQL, and modern web fundamentals.
+            I code experiences, not just interfaces. Computer Science &amp; AI undergraduate passionate about architecting scalable full-stack web applications and machine learning pipelines.
           </p>
-          <div class="hero-actions">
-            <a href="projects.html" class="btn btn-primary">View Featured Projects</a>
-            <a href="resume.pdf" class="btn btn-secondary" download aria-label="Download NIKIL RAJ K's Resume in PDF format">Download Resume / CV</a>
-            <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+
+          <div class="hero-btns">
+            <a href="#projects" class="btn btn-primary">
+              <span>View My Work</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+          </div>
+
+          <!-- Floating Tech Marquee -->
+          <div class="tech-badges-wrap">
+            <div class="tech-badges-label">// Tech Stack &amp; Tools</div>
+            <div class="tech-badges-scroller">
+              <div class="tech-badges-track" id="tech-track">
+                <span class="tech-badge">🐍 Python</span>
+                <span class="tech-badge">⚡ Flask</span>
+                <span class="tech-badge">🌐 HTML5 &amp; CSS3</span>
+                <span class="tech-badge">✨ JavaScript</span>
+                <span class="tech-badge">🤖 NLP &amp; ML</span>
+                <span class="tech-badge">🗄️ SQL</span>
+                <span class="tech-badge">🔥 Firebase</span>
+                <span class="tech-badge">🐙 Git &amp; GitHub</span>
+                <span class="tech-badge">🚀 REST APIs</span>
+                <span class="tech-badge">🎨 Vibe Coding</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="hero-image-wrapper">
-          <figure>
-            <img src="images/profile.jpeg" alt="Photograph of NIKIL RAJ K, Web Developer &amp; AI Engineer" class="profile-img" width="320" height="320" loading="eager">
-            <figcaption class="sr-only">NIKIL RAJ K, Web Developer &amp; AI/ML Enthusiast</figcaption>
-          </figure>
+
+        <!-- Hero Avatar Column with Halo & Gradient Border -->
+        <div class="hero-image-col reveal">
+          <div class="hero-avatar-wrapper">
+            <div class="avatar-halo" aria-hidden="true"></div>
+            <div class="avatar-ring">
+              <img src="assets/profile.jpeg" alt="Portrait photo of Nikil Raj K" class="avatar-img" width="360" height="360" loading="eager">
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Key Pillars / Highlights -->
-      <section class="section-highlights" aria-labelledby="highlights-heading">
-        <header class="section-header">
-          <h2 id="highlights-heading">Core Engineering Principles</h2>
-          <p class="lead-text">Writing clean code with modern developer workflows, intelligent ML integration, and inclusive design standards.</p>
-        </header>
-
-        <div class="features-grid">
-          <article class="feature-card">
-            <h3>Intelligent Web Solutions</h3>
-            <p>Integrating NLP, semantic similarity matching, and Python backend services with responsive front-end interfaces.</p>
-          </article>
-
-          <article class="feature-card">
-            <h3>Vibe Coding &amp; Rapid Iteration</h3>
-            <p>Modern developer velocity using modern Git, generative workflows, robust fundamentals, and pragmatic execution.</p>
-          </article>
-
-          <article class="feature-card">
-            <h3>Accessibility by Default</h3>
-            <p>Committed to WCAG 2.2 AA standards, ensuring full keyboard navigation, screen reader accessibility, and color contrast compliance.</p>
-          </article>
+    <!-- 3. About Me Section -->
+    <section class="section about" id="about" aria-label="About Me">
+      <div class="container">
+        <div class="section-title-wrap reveal">
+          <span class="section-subtitle">&lt;know_me&gt;</span>
+          <h2 class="section-title">About Me</h2>
         </div>
-      </section>
 
-      <!-- Featured Projects Preview Section -->
-      <section class="section-featured-projects" aria-labelledby="featured-projects-heading">
-        <header class="section-header">
-          <h2 id="featured-projects-heading">Selected Work</h2>
-          <p class="lead-text">Featured projects showcasing AI systems engineering and accessible front-end development.</p>
-        </header>
+        <div class="about-grid">
+          <!-- Photo Column -->
+          <div class="about-photo-col reveal">
+            <div class="about-photo-wrapper">
+              <div class="about-photo-frame">
+                <img src="assets/profile.jpeg" alt="Nikil Raj K photo" class="about-photo" width="400" height="500" loading="lazy">
+              </div>
+              <div class="about-card-badge">
+                <div class="badge-icon">🎓</div>
+                <div>
+                  <div class="badge-text-primary">B.E. AI &amp; ML</div>
+                  <div class="badge-text-secondary">Rajalakshmi Inst. of Tech</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bio & Info Grid Column -->
+          <div class="about-content reveal">
+            <h3>Who am I?</h3>
+            <p class="about-bio">
+              I am an aspiring Full Stack Developer and AI/ML engineer currently pursuing my Bachelor of Engineering at Rajalakshmi Institute of Technology. I specialize in crafting accessible, responsive web solutions with Python backends and modern front-end design tokens.
+            </p>
+            <p class="about-bio">
+              I love turning complex algorithmic challenges into elegant, intuitive products. Whether developing NLP-powered career platforms like <strong>ResumeIQ</strong> or building lightweight web apps with zero bloated dependencies, I deliver reliable code backed by solid fundamentals.
+            </p>
+
+            <!-- Info Grid -->
+            <div class="about-info-grid">
+              <div class="info-item">
+                <span class="info-label">Name</span>
+                <span class="info-value">Nikil Raj K</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Email</span>
+                <span class="info-value">nikilraj2688@gmail.com</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Phone</span>
+                <span class="info-value">+91 8925170432</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Location</span>
+                <span class="info-value">Vadakkankulam, Tamil Nadu, India</span>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="about-actions">
+              <a href="assets/resume.pdf" class="btn btn-primary" download aria-label="Download Nikil Raj K's Resume in PDF">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Download CV</span>
+              </a>
+              <button type="button" class="btn btn-outline" id="view-cv-btn" aria-haspopup="dialog" aria-controls="resume-modal">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <span>View CV</span>
+              </button>
+              <a href="https://github.com/nikilraj2688-pixel" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                <span>GitHub</span>
+                <span class="sr-only">(opens in new tab)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Projects Section -->
+    <section class="section projects" id="projects" aria-label="Featured Projects">
+      <div class="container">
+        <div class="section-title-wrap reveal">
+          <span class="section-subtitle">&lt;portfolio&gt;</span>
+          <h2 class="section-title">Featured Projects</h2>
+        </div>
 
         <div class="projects-grid">
-          <!-- Featured Project: ResumeIQ -->
-          <article class="project-card">
-            <figure class="project-figure">
-              <img src="images/project-1.png" alt="Screenshot of ResumeIQ AI resume analyzer dashboard showing ATS compatibility and roadmap" class="project-img" width="800" height="500" loading="lazy">
-            </figure>
-            <div class="project-content">
-              <h3 class="project-title">ResumeIQ &ndash; AI Resume Analyzer &amp; Career Roadmap</h3>
-              <p class="project-description">
-                Built a web app that scores resumes for ATS compatibility, matches them to tech roles using NLP and semantic similarity, and generates personalized skill-gap roadmaps.
+          <!-- Project 1: ResumeIQ -->
+          <article class="project-card reveal">
+            <div class="project-thumb">
+              <img src="assets/project-1.png" alt="Screenshot preview of ResumeIQ AI resume analyzer dashboard" class="project-img" width="800" height="500" loading="lazy">
+              <span class="project-badge-tag">AI &bull; NLP</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">ResumeIQ &mdash; AI Resume Analyzer</h3>
+              <p class="project-desc">
+                Scores resumes for ATS compatibility, matches candidates to tech job descriptions via NLP semantic similarity, and generates custom skill-gap roadmaps.
               </p>
-              <ul class="tech-list" aria-label="Technologies used in ResumeIQ">
-                <li class="tech-tag">Python</li>
-                <li class="tech-tag">Flask</li>
-                <li class="tech-tag">NLP</li>
-                <li class="tech-tag">Firebase</li>
-              </ul>
+              <div class="project-tech">
+                <span class="tech-chip">Python</span>
+                <span class="tech-chip">Flask</span>
+                <span class="tech-chip">NLP</span>
+                <span class="tech-chip">Firebase</span>
+                <span class="tech-chip">SQL</span>
+              </div>
               <div class="project-links">
-                <a href="projects.html" class="project-link">View Project Details<span class="sr-only"> for ResumeIQ</span></a>
+                <a href="https://resumeriq.onrender.com" class="btn-card-link" target="_blank" rel="noopener noreferrer">
+                  <span>Live Demo</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+                <a href="https://github.com/nikilraj2688-pixel/RESUMER-ANALYSER.git" class="btn-card-link" target="_blank" rel="noopener noreferrer">
+                  <span>GitHub</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
               </div>
             </div>
           </article>
 
-          <!-- Featured Project: Personal Portfolio -->
-          <article class="project-card">
-            <figure class="project-figure">
-              <img src="images/project-2.png" alt="Screenshot of Personal Portfolio Website interface" class="project-img" width="800" height="500" loading="lazy">
-            </figure>
-            <div class="project-content">
-              <h3 class="project-title">Accessible Personal Portfolio Website</h3>
-              <p class="project-description">
-                A multi-page, high-performance portfolio crafted with semantic HTML5, modern CSS3, and vanilla JS. Achieves 100/100 Lighthouse scores and strict WCAG 2.2 AA compliance.
+          <!-- Project 2: Accessible Portfolio -->
+          <article class="project-card reveal">
+            <div class="project-thumb">
+              <img src="assets/project-2.png" alt="Screenshot preview of Accessible Portfolio website interface" class="project-img" width="800" height="500" loading="lazy">
+              <span class="project-badge-tag">Frontend &bull; WCAG 2.2</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Accessible Live Portfolio</h3>
+              <p class="project-desc">
+                High-performance portfolio built with pure semantic HTML5, CSS3 variables, and zero runtime dependencies. Fully keyboard navigable with 100/100 accessibility standards.
               </p>
-              <ul class="tech-list" aria-label="Technologies used in Portfolio">
-                <li class="tech-tag">HTML5</li>
-                <li class="tech-tag">CSS3</li>
-                <li class="tech-tag">Vanilla JS</li>
-                <li class="tech-tag">WCAG 2.2</li>
-              </ul>
+              <div class="project-tech">
+                <span class="tech-chip">HTML5</span>
+                <span class="tech-chip">CSS3 Grid</span>
+                <span class="tech-chip">Vanilla JS</span>
+                <span class="tech-chip">WCAG 2.2</span>
+              </div>
               <div class="project-links">
-                <a href="projects.html" class="project-link">View Project Details<span class="sr-only"> for Personal Portfolio</span></a>
+                <a href="https://portfolio-96-six.vercel.app/" class="btn-card-link">
+                  <span>Live Demo</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+                <a href="https://github.com/nikilraj2688-pixel/PORTFOLIO.git" class="btn-card-link" target="_blank" rel="noopener noreferrer">
+                  <span>GitHub</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: PORTFOLIO 2.0 -->
+          <article class="project-card reveal">
+            <div class="project-thumb">
+              <img src="assets/project-3.jpg" alt="Screenshot preview of PORTFOLIO 2.0 luxury black, red and gold design" class="project-img" width="800" height="500" loading="lazy">
+              <span class="project-badge-tag">Full Stack &bull; Modern UI</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">PORTFOLIO 2.0</h3>
+              <p class="project-desc">
+                Next-generation developer showcase featuring a dark luxury Black, Red, and Gold palette, reactive cursor spotlight tracking, high-speed performance, and modular interactive components.
+              </p>
+              <div class="project-tech">
+                <span class="tech-chip">HTML5 / CSS3</span>
+                <span class="tech-chip">Interactive Cursor</span>
+                <span class="tech-chip">Vibe Coding</span>
+                <span class="tech-chip">Vanilla JS</span>
+              </div>
+              <div class="project-links">
+                <a href="#home" class="btn-card-link">
+                  <span>Live Demo</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+                <a href="https://github.com/nikilraj2688-pixel/PORTFOLIO-2.0.git" class="btn-card-link" target="_blank" rel="noopener noreferrer">
+                  <span>GitHub</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
               </div>
             </div>
           </article>
         </div>
 
-        <div class="hero-actions" style="margin-top: 2rem;">
-          <a href="projects.html" class="btn btn-secondary">Explore All Projects &rarr;</a>
+        <div class="projects-cta-center reveal">
+          <a href="https://github.com/nikilraj2688-pixel" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            <span>View All Projects on GitHub</span>
+            <span class="sr-only">(opens in new tab)</span>
+          </a>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+
+    <!-- 5. Skills Section -->
+    <section class="section skills" id="skills" aria-label="Technical Skills">
+      <div class="container">
+        <div class="section-title-wrap reveal">
+          <span class="section-subtitle">&lt;expertise&gt;</span>
+          <h2 class="section-title">Technical Skills</h2>
+        </div>
+
+        <div class="skills-grid">
+          <!-- Skill 1: Python -->
+          <div class="skill-card reveal">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">🐍</span>
+                <span class="skill-title">Python</span>
+              </div>
+            </div>
+            <p class="skill-desc">Core programming, algorithms, scripting, and automation.</p>
+          </div>
+
+          <!-- Skill 2: Git & GitHub -->
+          <div class="skill-card reveal">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">🐙</span>
+                <span class="skill-title">Git &amp; GitHub</span>
+              </div>
+            </div>
+            <p class="skill-desc">Version control, branching workflows, collaboration, and repository management.</p>
+          </div>
+
+          <!-- Skill 3: Web Development Fundamentals -->
+          <div class="skill-card reveal">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">🌐</span>
+                <span class="skill-title">Web Development Fundamentals</span>
+              </div>
+            </div>
+            <p class="skill-desc">Semantic structure, responsive layouts, web standards, and UI interactivity.</p>
+          </div>
+
+          <!-- Skill 4: SQL & FireBase -->
+          <div class="skill-card reveal">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">🗄️</span>
+                <span class="skill-title">SQL &amp; FireBase</span>
+              </div>
+            </div>
+            <p class="skill-desc">Relational schema design, queries, and Firebase cloud real-time datastores.</p>
+          </div>
+
+          <!-- Skill 5: Vibe Coding -->
+          <div class="skill-card reveal">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">🚀</span>
+                <span class="skill-title">Vibe Coding</span>
+              </div>
+            </div>
+            <p class="skill-desc">High-speed generative AI workflows, rapid prototyping, and engineering velocity.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Contact Section -->
+    <section class="section contact" id="contact" aria-label="Contact Section">
+      <div class="container">
+        <div class="section-title-wrap reveal">
+          <span class="section-subtitle">&lt;get_in_touch&gt;</span>
+          <h2 class="section-title">Contact Me</h2>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Form Column -->
+          <div class="contact-card-form reveal">
+            <form id="contact-form" action="https://formspree.io/f/your_form_id" method="POST" novalidate>
+              <div class="form-group">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Your Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" id="subject" name="subject" class="form-control" placeholder="Project Inquiry / Job Opportunity" required>
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" name="message" class="form-control" rows="5" placeholder="Let's build something awesome together..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <span>Send Message</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+
+              <div id="contact-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+
+          <!-- Contact Details & Social Column -->
+          <div class="contact-info-col reveal">
+            <div class="contact-info-card">
+              <h3>Contact Information</h3>
+              <ul class="contact-info-list">
+                <li class="contact-info-item">
+                  <div class="contact-icon" aria-hidden="true">📍</div>
+                  <div>
+                    <div class="contact-meta-label">Location</div>
+                    <div class="contact-meta-val">Vadakkankulam, Tirunelveli, Tamil Nadu, India</div>
+                  </div>
+                </li>
+                <li class="contact-info-item">
+                  <div class="contact-icon" aria-hidden="true">✉️</div>
+                  <div>
+                    <div class="contact-meta-label">Email</div>
+                    <a href="mailto:nikilraj2688@gmail.com" class="contact-meta-val">nikilraj2688@gmail.com</a>
+                  </div>
+                </li>
+                <li class="contact-info-item">
+                  <div class="contact-icon" aria-hidden="true">📞</div>
+                  <div>
+                    <div class="contact-meta-label">Phone</div>
+                    <a href="tel:8925170432" class="contact-meta-val">+91 8925170432</a>
+                  </div>
+                </li>
+              </ul>
+
+              <h4 class="social-title">Follow Me</h4>
+              <div class="social-links">
+                <!-- GitHub -->
+                <a href="https://github.com/nikilraj2688-pixel" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <!-- Instagram -->
+                <a href="https://instagram.com/nikil_.raj" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/nikil-raj-ab12b8347/" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer Landmark -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container footer-content">
-      <div class="footer-info">
-        <p><strong>NIKIL RAJ K</strong> &mdash; Web Developer</p>
-        <address class="footer-address">
-          <span>Vadakkankulam,Tirunelveli,Tamil Nadu</span> &bull;
-          <a href="mailto:nikilraj2688@gmail.com">nikilraj2688@gmail.com</a> &bull;
-          <a href="tel:8925170432">+91 8925170432</a>
-        </address>
+  <!-- 7. Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="gradient-text">NIKIL RAJ K</span>
+          </div>
+          <p>Full Stack Developer &amp; AI Engineer crafting resilient web experiences.</p>
+        </div>
+
+        <ul class="footer-links-nav" aria-label="Footer Quick Links">
+          <li><a href="#home" class="footer-nav-link">Home</a></li>
+          <li><a href="#about" class="footer-nav-link">About</a></li>
+          <li><a href="#projects" class="footer-nav-link">Projects</a></li>
+          <li><a href="#skills" class="footer-nav-link">Skills</a></li>
+          <li><a href="#contact" class="footer-nav-link">Contact</a></li>
+        </ul>
       </div>
 
-      <nav aria-label="Social media links">
-        <ul class="footer-social-list">
-          <li>
-            <a href="https://instagram.com/nikil_.raj" class="social-link" target="_blank" rel="noopener noreferrer">
-              Instagram (@nikil_.raj) <span class="sr-only">(opens in new tab)</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/nikilraj2688-pixel" class="social-link" target="_blank" rel="noopener noreferrer">
-              GitHub <span class="sr-only">(opens in new tab)</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/nikil-raj-ab12b8347/" class="social-link" target="_blank" rel="noopener noreferrer">
-              LinkedIn <span class="sr-only">(opens in new tab)</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="container footer-bottom">
-      <p>&copy; <time datetime="2026">2026</time> NIKIL RAJ K. All rights reserved.</p>
-      <p>Built with semantic HTML5, CSS3, and vanilla JS. WCAG 2.2 AA compliant.</p>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Nikil Raj K. All rights reserved.</p>
+        <p>Built with modern semantic HTML5, CSS3, and vanilla JS.</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Vanilla JavaScript -->
+  <!-- View CV Lightbox Modal -->
+  <div class="modal-overlay" id="resume-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Curriculum Vitae &mdash; Nikil Raj K</h3>
+        <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close CV Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img src="assets/resume.jpg" alt="Nikil Raj K Resume CV Document" class="modal-resume-img" loading="lazy">
+        <div style="margin-top: 1.5rem;">
+          <a href="assets/resume.pdf" class="btn btn-primary" download>
+            <span>Download Official PDF</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <button type="button" class="scroll-top-btn" id="scroll-top-btn" aria-label="Scroll back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 4l-8 8h5v8h6v-8h5z"></path>
+    </svg>
+  </button>
+
+  <!-- JavaScript -->
   <script src="js/main.js"></script>
 </body>
 </html>

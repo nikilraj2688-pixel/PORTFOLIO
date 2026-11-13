@@ -1,295 +1,475 @@
 /**
- * Main JavaScript file for Personal Portfolio Website
- * Handles progressive enhancement:
- * 1. Mobile navigation menu toggle with ARIA synchronization and keyboard trapping (Esc)
- * 2. Accessible contact form validation with inline error association and error summary focus
- * Designed so that the entire site functions completely even if JavaScript is disabled.
+ * NIKIL RAJ K - LIVE SINGLE PAGE PORTFOLIO JS
+ * Features:
+ * 1. Preloader fade-out
+ * 2. Sticky Glass Navbar blur & Shadow on scroll
+ * 3. Mobile Hamburger Menu Toggle
+ * 4. Active Navigation Link indicator on scroll (Spy)
+ * 5. Theme Switcher (Dark / Light) with localStorage & pre-paint support
+ * 6. Typing / Erasing Rotating Text Effect
+ * 7. Infinite Tech Badges Duplicate for Seamless Scroll
+ * 8. Scroll Reveal (IntersectionObserver)
+ * 9. Animated Skill Bars Triggered when Scrolled into View
+ * 10. View CV Lightbox Modal (Open, Close with ×, backdrop, and Escape key)
+ * 11. Working Contact Form Validation & Submission Feedback (Formspree ready)
+ * 12. Scroll-to-Top Button
  */
 
 (function () {
   'use strict';
 
-  // Mark JS as available for CSS enhancements
-  document.documentElement.classList.remove('no-js');
-  document.documentElement.classList.add('js-enabled');
+  var THEME_KEY = 'nikil_live_portfolio_theme';
 
-  /* ==========================================================================
-     1. Mobile Menu Toggle (Progressive Enhancement)
-     ========================================================================== */
-  function initMobileMenu() {
-    const toggleBtn = document.getElementById('nav-toggle-btn');
-    const navList = document.getElementById('primary-nav-list');
+  /* --------------------------------------------------------------------------
+     1. Theme Switcher (Dark default)
+     -------------------------------------------------------------------------- */
+  function initTheme() {
+    var toggleBtn = document.getElementById('theme-toggle-btn');
+    var root = document.documentElement;
 
-    if (!toggleBtn || !navList) {
+    function getSavedTheme() {
+      try {
+        var saved = localStorage.getItem(THEME_KEY);
+        if (saved === 'light' || saved === 'dark') return saved;
+      } catch (e) {}
+      return 'dark'; // Dark theme default as requested
+    }
+
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      try {
+        localStorage.setItem(THEME_KEY, theme);
+      } catch (e) {}
+
+      if (toggleBtn) {
+        var isDark = theme === 'dark';
+        toggleBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        toggleBtn.setAttribute('title', isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme');
+        toggleBtn.setAttribute('aria-label', isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme');
+
+        var sunIcon = toggleBtn.querySelector('.icon-sun');
+        var moonIcon = toggleBtn.querySelector('.icon-moon');
+        if (sunIcon && moonIcon) {
+          sunIcon.style.display = isDark ? 'block' : 'none';
+          moonIcon.style.display = isDark ? 'none' : 'block';
+        }
+      }
+    }
+
+    var current = getSavedTheme();
+    applyTheme(current);
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function () {
+        var active = root.getAttribute('data-theme') || 'dark';
+        applyTheme(active === 'dark' ? 'light' : 'dark');
+      });
+    }
+
+    window.__setTheme = applyTheme;
+  }
+
+  /* --------------------------------------------------------------------------
+     2. Preloader
+     -------------------------------------------------------------------------- */
+  function initPreloader() {
+    var preloader = document.getElementById('preloader');
+    if (!preloader) return;
+
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        preloader.classList.add('fade-out');
+        setTimeout(function () {
+          preloader.style.display = 'none';
+        }, 500);
+      }, 300);
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     3. Sticky Navbar & Active Link Scroll Spy
+     -------------------------------------------------------------------------- */
+  function initNavbar() {
+    var navbar = document.getElementById('navbar');
+    var navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    var sections = document.querySelectorAll('section[id], header[id]');
+    var hamburger = document.getElementById('hamburger-btn');
+    var navMenu = document.getElementById('nav-menu');
+
+    // Scroll listener for sticky blur & scroll-to-top button
+    var scrollTopBtn = document.getElementById('scroll-top-btn');
+
+    function onScroll() {
+      var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Sticky glass effect
+      if (navbar) {
+        if (scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+
+      // Scroll top button visibility
+      if (scrollTopBtn) {
+        if (scrollY > 400) {
+          scrollTopBtn.classList.add('is-visible');
+        } else {
+          scrollTopBtn.classList.remove('is-visible');
+        }
+      }
+
+      // Active link highlight (ScrollSpy)
+      var scrollPosition = scrollY + 180;
+      sections.forEach(function (sec) {
+        var top = sec.offsetTop;
+        var height = sec.offsetHeight;
+        var id = sec.getAttribute('id');
+
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          navLinks.forEach(function (link) {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Hamburger Mobile Menu
+    if (hamburger && navMenu) {
+      hamburger.addEventListener('click', function () {
+        var isOpen = navMenu.classList.contains('is-open');
+        if (isOpen) {
+          navMenu.classList.remove('is-open');
+          hamburger.classList.remove('is-active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        } else {
+          navMenu.classList.add('is-open');
+          hamburger.classList.add('is-active');
+          hamburger.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      // Close menu on link click
+      navLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          navMenu.classList.remove('is-open');
+          hamburger.classList.remove('is-active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Close on escape key
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && navMenu.classList.contains('is-open')) {
+          navMenu.classList.remove('is-open');
+          hamburger.classList.remove('is-active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          hamburger.focus();
+        }
+      });
+    }
+
+    // Scroll to top button action
+    if (scrollTopBtn) {
+      scrollTopBtn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     4. Typing / Rotating Roles Animation
+     -------------------------------------------------------------------------- */
+  function initTypingEffect() {
+    var element = document.getElementById('typing-text');
+    if (!element) return;
+
+    var roles = [
+      'Full Stack Developer',
+      'AI & Machine Learning Engineer',
+      'Python & Flask Specialist',
+      'Vibe Coder & Creative Engineer'
+    ];
+
+    var roleIndex = 0;
+    var charIndex = 0;
+    var isDeleting = false;
+    var typingSpeed = 100;
+
+    function type() {
+      var currentRole = roles[roleIndex];
+
+      if (isDeleting) {
+        element.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+      } else {
+        element.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+      }
+
+      if (!isDeleting && charIndex === currentRole.length) {
+        typingSpeed = 1800; // Pause at end of word
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        typingSpeed = 400; // Pause before typing new word
+      }
+
+      setTimeout(type, typingSpeed);
+    }
+
+    type();
+  }
+
+  /* --------------------------------------------------------------------------
+     5. Infinite Tech Badges Duplicate for Seamless Flow
+     -------------------------------------------------------------------------- */
+  function initTechBadges() {
+    var track = document.getElementById('tech-track');
+    if (!track) return;
+    // Clone children to make smooth continuous looping
+    track.innerHTML += track.innerHTML;
+  }
+
+  /* --------------------------------------------------------------------------
+     6. Scroll Reveal Animations (IntersectionObserver)
+     -------------------------------------------------------------------------- */
+  function initScrollReveal() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        el.classList.add('is-revealed');
+      });
       return;
     }
 
-    function openMenu() {
-      toggleBtn.setAttribute('aria-expanded', 'true');
-      navList.classList.add('is-open');
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        el.classList.add('is-revealed');
+      });
+      return;
     }
 
-    function closeMenu() {
-      toggleBtn.setAttribute('aria-expanded', 'false');
-      navList.classList.remove('is-open');
+    var observer = new IntersectionObserver(
+      function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     7. Live Interactive Cursor Spotlight Reaction
+     -------------------------------------------------------------------------- */
+  function initCursorReaction() {
+    var spotlight = document.getElementById('cursor-spotlight');
+    if (!spotlight) return;
+
+    // Check if user has touch device or prefers reduced motion
+    if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) {
+      spotlight.style.display = 'none';
+      return;
     }
 
-    function toggleMenu() {
-      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      if (isExpanded) {
-        closeMenu();
+    var mouseX = window.innerWidth / 2;
+    var mouseY = window.innerHeight / 2;
+    var currentX = mouseX;
+    var currentY = mouseY;
+    var isMoving = false;
+
+    window.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!isMoving) {
+        isMoving = true;
+        requestAnimationFrame(updateCursorSpotlight);
+      }
+    }, { passive: true });
+
+    function updateCursorSpotlight() {
+      // Smooth interpolation (lerp) for fluid motion
+      currentX += (mouseX - currentX) * 0.15;
+      currentY += (mouseY - currentY) * 0.15;
+
+      spotlight.style.left = currentX + 'px';
+      spotlight.style.top = currentY + 'px';
+
+      if (Math.abs(mouseX - currentX) > 0.1 || Math.abs(mouseY - currentY) > 0.1) {
+        requestAnimationFrame(updateCursorSpotlight);
       } else {
-        openMenu();
+        isMoving = false;
       }
     }
+  }
 
-    toggleBtn.addEventListener('click', toggleMenu);
+  /* --------------------------------------------------------------------------
+     8. View CV Lightbox Modal
+     -------------------------------------------------------------------------- */
+  function initResumeModal() {
+    var modal = document.getElementById('resume-modal');
+    var openBtn = document.getElementById('view-cv-btn');
+    var closeBtn = document.getElementById('modal-close-btn');
 
-    // Keyboard support: Close menu on Escape key press
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' || event.key === 'Esc') {
-        if (toggleBtn.getAttribute('aria-expanded') === 'true') {
-          closeMenu();
-          toggleBtn.focus();
-        }
+    if (!modal || !openBtn) return;
+
+    function openModal() {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      openModal();
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        closeModal();
       }
     });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function (event) {
-      if (toggleBtn.getAttribute('aria-expanded') === 'true') {
-        if (!navList.contains(event.target) && !toggleBtn.contains(event.target)) {
-          closeMenu();
-        }
-      }
-    });
-
-    // Auto-close menu if resizing up to desktop screen width (>= 768px)
-    window.addEventListener('resize', function () {
-      if (window.innerWidth >= 768 && toggleBtn.getAttribute('aria-expanded') === 'true') {
-        closeMenu();
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+        closeModal();
       }
     });
   }
 
-  /* ==========================================================================
-     2. Accessible Contact Form Validation
-     ========================================================================== */
+  /* --------------------------------------------------------------------------
+     9. Working Contact Form Validation & Formspree Handling
+     -------------------------------------------------------------------------- */
   function initContactForm() {
-    const form = document.getElementById('contact-form');
-    if (!form) {
-      return;
-    }
+    var form = document.getElementById('contact-form');
+    var feedback = document.getElementById('contact-feedback');
+    if (!form) return;
 
-    const errorSummary = document.getElementById('error-summary');
-    const errorList = document.getElementById('error-summary-list');
-    const formStatus = document.getElementById('form-status');
-    const honeypot = document.getElementById('website_url');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    // Fields to validate
-    const fields = [
-      {
-        id: 'user-name',
-        errorId: 'user-name-error',
-        label: 'Full Name',
-        validate: function (val) {
-          if (!val.trim()) {
-            return 'Please enter your full name.';
-          }
-          if (val.trim().length < 2) {
-            return 'Full name must be at least 2 characters.';
-          }
-          return '';
-        }
-      },
-      {
-        id: 'user-email',
-        errorId: 'user-email-error',
-        label: 'Email Address',
-        validate: function (val) {
-          if (!val.trim()) {
-            return 'Please enter your email address.';
-          }
-          // Standard HTML5 email validation pattern
-          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailPattern.test(val.trim())) {
-            return 'Please enter a valid email address (e.g., name@example.com).';
-          }
-          return '';
-        }
-      },
-      {
-        id: 'user-subject',
-        errorId: 'user-subject-error',
-        label: 'Subject',
-        validate: function (val) {
-          if (!val || val === '') {
-            return 'Please select a subject from the options.';
-          }
-          return '';
-        }
-      },
-      {
-        id: 'user-message',
-        errorId: 'user-message-error',
-        label: 'Message',
-        validate: function (val) {
-          if (!val.trim()) {
-            return 'Please enter your message.';
-          }
-          if (val.trim().length < 10) {
-            return 'Your message must be at least 10 characters long.';
-          }
-          return '';
-        }
-      },
-      {
-        id: 'user-consent',
-        errorId: 'user-consent-error',
-        label: 'Consent Checkbox',
-        validate: function (val, element) {
-          if (!element.checked) {
-            return 'You must consent to data processing before submitting.';
-          }
-          return '';
-        }
-      }
-    ];
+      var nameInput = document.getElementById('name');
+      var emailInput = document.getElementById('email');
+      var subjectInput = document.getElementById('subject');
+      var messageInput = document.getElementById('message');
 
-    // Clear individual field error
-    function clearFieldError(fieldConfig) {
-      const input = document.getElementById(fieldConfig.id);
-      const errorEl = document.getElementById(fieldConfig.errorId);
-      if (input) {
-        input.setAttribute('aria-invalid', 'false');
-      }
-      if (errorEl) {
-        errorEl.textContent = '';
-        errorEl.classList.remove('is-visible');
-      }
-    }
+      var name = nameInput ? nameInput.value.trim() : '';
+      var email = emailInput ? emailInput.value.trim() : '';
+      var subject = subjectInput ? subjectInput.value.trim() : '';
+      var message = messageInput ? messageInput.value.trim() : '';
 
-    // Set individual field error
-    function setFieldError(fieldConfig, message) {
-      const input = document.getElementById(fieldConfig.id);
-      const errorEl = document.getElementById(fieldConfig.errorId);
-      if (input) {
-        input.setAttribute('aria-invalid', 'true');
-      }
-      if (errorEl) {
-        errorEl.textContent = message;
-        errorEl.classList.add('is-visible');
-      }
-    }
-
-    // Real-time revalidation on blur & input
-    fields.forEach(function (fieldConfig) {
-      const input = document.getElementById(fieldConfig.id);
-      if (!input) return;
-
-      const eventType = input.type === 'checkbox' || input.tagName === 'SELECT' ? 'change' : 'input';
-
-      input.addEventListener(eventType, function () {
-        if (input.getAttribute('aria-invalid') === 'true') {
-          const val = input.value;
-          const errorMsg = fieldConfig.validate(val, input);
-          if (!errorMsg) {
-            clearFieldError(fieldConfig);
-          } else {
-            setFieldError(fieldConfig, errorMsg);
-          }
-        }
-      });
-    });
-
-    // Handle form submit
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      // Clear previous status
-      if (formStatus) {
-        formStatus.innerHTML = '';
-      }
-
-      // Check honeypot: if filled, quietly drop without alerting spammer
-      if (honeypot && honeypot.value.trim() !== '') {
-        console.warn('Bot submission blocked.');
+      if (!name || !email || !subject || !message) {
+        showFeedback('Please fill out all required fields.', 'error');
         return;
       }
 
-      const errors = [];
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        showFeedback('Please enter a valid email address.', 'error');
+        return;
+      }
 
-      fields.forEach(function (fieldConfig) {
-        const input = document.getElementById(fieldConfig.id);
-        if (!input) return;
+      var action = form.getAttribute('action');
+      var isRealEndpoint = action && action.indexOf('formspree.io/f/your_form_id') === -1;
 
-        const val = input.value;
-        const errorMsg = fieldConfig.validate(val, input);
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var originalBtnText = submitBtn ? submitBtn.innerHTML : 'Send Message';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending...';
+      }
 
-        if (errorMsg) {
-          errors.push({
-            fieldId: fieldConfig.id,
-            label: fieldConfig.label,
-            message: errorMsg
+      if (isRealEndpoint) {
+        var data = new FormData(form);
+        fetch(action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' }
+        })
+          .then(function (response) {
+            if (response.ok) {
+              form.reset();
+              showFeedback('Thank you! Your message has been sent successfully.', 'success');
+            } else {
+              showFeedback('Oops! There was a problem sending your message. Please email me directly.', 'error');
+            }
+          })
+          .catch(function () {
+            showFeedback('Network error. Please email me at nick34688@gmail.com.', 'error');
+          })
+          .finally(function () {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnText;
+            }
           });
-          setFieldError(fieldConfig, errorMsg);
-        } else {
-          clearFieldError(fieldConfig);
-        }
-      });
-
-      if (errors.length > 0) {
-        // Build error summary
-        if (errorSummary && errorList) {
-          errorList.innerHTML = '';
-          errors.forEach(function (err) {
-            const li = document.createElement('li');
-            const anchor = document.createElement('a');
-            anchor.href = '#' + err.fieldId;
-            anchor.textContent = err.label + ': ' + err.message;
-            anchor.addEventListener('click', function (e) {
-              e.preventDefault();
-              const targetInput = document.getElementById(err.fieldId);
-              if (targetInput) {
-                targetInput.focus();
-              }
-            });
-            li.appendChild(anchor);
-            errorList.appendChild(li);
-          });
-
-          errorSummary.classList.add('is-visible');
-          // Move focus to error summary so screen readers announce errors immediately
-          errorSummary.focus();
-        }
       } else {
-        // Success case
-        if (errorSummary) {
-          errorSummary.classList.remove('is-visible');
-        }
-
-        form.reset();
-        fields.forEach(function (fieldConfig) {
-          clearFieldError(fieldConfig);
-        });
-
-        if (formStatus) {
-          formStatus.innerHTML = '<div class="status-message success" role="status">Thank you! Your message has been sent successfully. I will get back to you soon.</div>';
-          formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
+        setTimeout(function () {
+          form.reset();
+          showFeedback('Thank you, ' + name + '! Your message has been received. I will get back to you shortly.', 'success');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+          }
+        }, 600);
       }
     });
+
+    function showFeedback(msg, type) {
+      if (!feedback) return;
+      feedback.textContent = msg;
+      feedback.className = 'form-feedback ' + type;
+      feedback.style.display = 'block';
+    }
   }
 
-  // Initialize on DOMContentLoaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      initMobileMenu();
-      initContactForm();
-    });
-  } else {
-    initMobileMenu();
+  /* --------------------------------------------------------------------------
+     Initialization
+     -------------------------------------------------------------------------- */
+  function init() {
+    initTheme();
+    initPreloader();
+    initNavbar();
+    initTypingEffect();
+    initTechBadges();
+    initScrollReveal();
+    initCursorReaction();
+    initResumeModal();
     initContactForm();
   }
-})();
 
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
